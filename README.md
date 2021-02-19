@@ -7,4 +7,4 @@ Tested on macbook pro i7
 
 ### Results
 
-![alt text](results2.png "results")
+![alt text](results.png "results")
