@@ -27,7 +27,6 @@ int main()
     printf("blas matrix multiplication example\n");
     blas_multiplication_example(100, 100);
     blas_multiplication_example(1000, 1000);
-    blas_multiplication_example(5000, 5000);
 //    blas_multiplication_example(5000, 5000);
     printf("\n");
 
