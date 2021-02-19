@@ -14,31 +14,50 @@ double **generate_empty_matrix(int num_of_columns, int num_of_rows);
 double **generate_test_matrix(int num_of_columns, int num_of_rows);
 double **matrix_multiplication(double** matrix1, double** matrix2, int num_of_columns, int num_of_rows);
 
+double *generate_matrix_in_a_row(int num_of_columns, int num_of_rows);
+double *generate_empty_matrix_in_a_row(int num_of_columns, int num_of_rows);
+void blas_multiplication_example(int num_of_columns, int num_of_rows);
 void multiplication_example(int num_of_columns, int num_of_rows);
 void multiplication_test();
 
 int main()
 {
-    int i = 0;
-    double A[6] = {1.0,2.0,1.0,-3.0,4.0,-1.0};
-    double B[6] = {1.0,2.0,1.0,-3.0,4.0,-1.0};
-    double C[9] = {.5,.5,.5,.5,.5,.5,.5,.5,.5};
-
-    cblas_dgemm(CblasColMajor, CblasNoTrans, CblasTrans,3,3,2,1,A, 3, B, 3,2,C,3);
-
-//    for(i=0; i<9; i++)
-//        printf("%lf ", C[i]);
-//    printf("\n");
-
-//    printf("random: %f", random_in_range(-2, 2));
-
 //    multiplication_test();
 
+    printf("blas matrix multiplication example\n");
+    blas_multiplication_example(100, 100);
+    blas_multiplication_example(1000, 1000);
+//    blas_multiplication_example(5000, 5000);
+    printf("\n");
+
+    printf("brute force matrix multiplication example\n");
     multiplication_example(100, 100);
-//    multiplication_example(1000, 1000);
+    multiplication_example(1000, 1000);
 //    multiplication_example(5000, 5000);
 
     return 0;
+}
+
+void blas_multiplication_example(int num_of_columns, int num_of_rows) {
+    double execution_time;
+
+    double* A = generate_matrix_in_a_row(num_of_columns, num_of_rows);
+    double* B = generate_matrix_in_a_row(num_of_columns, num_of_rows);
+    double* C = generate_empty_matrix_in_a_row(num_of_columns, num_of_rows);
+    int k = num_of_rows;
+    int ldc = num_of_rows;
+    int ldb = num_of_rows;
+    int lda = num_of_rows;
+
+    clock_t begin = clock();
+    cblas_dgemm(CblasColMajor, CblasNoTrans, CblasTrans, num_of_columns, num_of_rows, k,1,A, lda, B, ldb,2,C,ldc);
+    clock_t end = clock();
+    execution_time = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("%dx%d matrix multiplication time is %f seconds\n", num_of_columns, num_of_rows, execution_time);
+
+    free(A);
+    free(B);
+    free(C);
 }
 
 
@@ -71,6 +90,22 @@ double **matrix_multiplication(double** matrix1, double** matrix2, int num_of_co
     printf("%dx%d matrix multiplication time is %f seconds\n", num_of_columns, num_of_rows, execution_time);
 
     return result;
+}
+
+double *generate_matrix_in_a_row(int num_of_columns, int num_of_rows) {
+    int i;
+    int matrix_size = num_of_columns * num_of_rows;
+    double* matrix = (double*)malloc(sizeof(double) * matrix_size);
+
+    for (i = 0; i < matrix_size; i++) {
+        *(matrix + i) = random_in_range(-2, 2);
+    }
+
+    return matrix;
+}
+
+double *generate_empty_matrix_in_a_row(int num_of_columns, int num_of_rows) {
+    return (double*)malloc(sizeof(double) * num_of_columns * num_of_rows);
 }
 
 double **generate_matrix(int num_of_columns, int num_of_rows) {
