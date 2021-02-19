@@ -1,2 +1,2 @@
 # scientific-computing-2021
-homeworks
+Tested on macbook pro i7
