@@ -11,9 +11,15 @@
     x = 8m<sup>2</sup> = 8&#215;83411<sup>2</sup> bytes = **52GB**  
     
     
-3)  resolution = 52/16 = 3.25 (instead of 1km, should be about 3.25km)  
+3)  resolution = 52GB/16GB = 3.25 (instead of 1km, should be about 3.25km)  
 
 
-4)  will be updated soon
+4)  resolution = 52GB&#215;5/16GB = 16.25
+    (instead of 1km, should be about 16.25km),  
+    5 contains: temperature, humidity,
+    pressure and windspeed (2-component velolity)  
+    
+    
+5)  Will be updated soon
     
 
