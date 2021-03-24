@@ -14,6 +14,6 @@
 3)  resolution = 52/16 = 3.25 (instead of 1km, should be about 3.25km)  
 
 
-4)  
+4)  will be updated soon
     
 
